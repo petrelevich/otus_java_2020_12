@@ -50,7 +50,9 @@ class CustomerTest {
         assertThat(smallestScore.getKey()).isEqualTo(customer2);
 
         //when
-        Map.Entry<Customer, String> middleScore = customerService.getNext(smallestScore.getKey());
+        // подсказка:
+        // a key-value mapping associated with the least key strictly greater than the given key, or null if there is no such key.
+        Map.Entry<Customer, String> middleScore = customerService.getNext(new Customer(10, "Key", 20));
         //then
         assertThat(middleScore.getKey()).isEqualTo(customer1);
 
@@ -58,6 +60,12 @@ class CustomerTest {
         Map.Entry<Customer, String> biggestScore = customerService.getNext(middleScore.getKey());
         //then
         assertThat(biggestScore.getKey()).isEqualTo(customer3);
+
+        //when
+        Map.Entry<Customer, String> notExists = customerService.getNext(new Customer(100, "Not exists", 20000));
+        //then
+        assertThat(notExists).isNull();
+
     }
 
     @Test
@@ -86,8 +94,8 @@ class CustomerTest {
     void reverseOrderTest() {
         //given
         Customer customer1 = new Customer(1, "Ivan", 233);
-        Customer customer2 = new Customer(2, "Petr", 11);
-        Customer customer3 = new Customer(3, "Pavel", 888);
+        Customer customer2 = new Customer(3, "Petr", 11);
+        Customer customer3 = new Customer(2, "Pavel", 888);
 
         CustomerReverseOrder customerReverseOrder = new CustomerReverseOrder();
         customerReverseOrder.add(customer1);
