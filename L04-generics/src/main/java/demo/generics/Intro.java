@@ -1,4 +1,4 @@
-package ru.otus.generics;
+package demo.generics;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

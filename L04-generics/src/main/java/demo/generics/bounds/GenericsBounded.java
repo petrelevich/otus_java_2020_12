@@ -1,8 +1,8 @@
-package ru.otus.generics.bounds;
+package demo.generics.bounds;
 
-import ru.otus.generics.bounds.entries.Cat;
-import ru.otus.generics.bounds.entries.HomeCat;
-import ru.otus.generics.bounds.entries.WildCat;
+import demo.generics.bounds.entries.Cat;
+import demo.generics.bounds.entries.HomeCat;
+import demo.generics.bounds.entries.WildCat;
 
 public class GenericsBounded<T extends Cat> {
 

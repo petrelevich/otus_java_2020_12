@@ -1,4 +1,4 @@
-package ru.otus.generics;
+package demo.generics;
 
 import java.util.Collection;
 import java.util.Iterator;

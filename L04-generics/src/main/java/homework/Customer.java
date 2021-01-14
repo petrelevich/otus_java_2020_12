@@ -1,4 +1,4 @@
-package ru.otus;
+package homework;
 
 public class Customer {
     private final long id;

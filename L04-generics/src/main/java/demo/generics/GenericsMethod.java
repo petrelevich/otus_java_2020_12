@@ -1,4 +1,4 @@
-package ru.otus.generics;
+package demo.generics;
 
 public class GenericsMethod {
 

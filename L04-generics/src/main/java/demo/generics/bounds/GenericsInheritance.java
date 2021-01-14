@@ -1,7 +1,7 @@
-package ru.otus.generics.bounds;
+package demo.generics.bounds;
 
-import ru.otus.generics.bounds.entries.Animal;
-import ru.otus.generics.bounds.entries.Cat;
+import demo.generics.bounds.entries.Animal;
+import demo.generics.bounds.entries.Cat;
 
 import java.util.ArrayList;
 import java.util.List;

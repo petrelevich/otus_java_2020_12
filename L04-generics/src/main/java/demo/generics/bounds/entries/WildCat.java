@@ -1,4 +1,4 @@
-package ru.otus.generics.bounds.entries;
+package demo.generics.bounds.entries;
 
 public class WildCat extends Cat {
     private String name;

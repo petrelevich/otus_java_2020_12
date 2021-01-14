@@ -1,7 +1,9 @@
-import ru.otus.generics.bounds.entries.Animal;
-import ru.otus.generics.bounds.entries.Cat;
-import ru.otus.generics.bounds.entries.HomeCat;
-import ru.otus.generics.bounds.entries.WildCat;
+package demo;
+
+import demo.generics.bounds.entries.Animal;
+import demo.generics.bounds.entries.Cat;
+import demo.generics.bounds.entries.HomeCat;
+import demo.generics.bounds.entries.WildCat;
 
 import java.util.*;
 

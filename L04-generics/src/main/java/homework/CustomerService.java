@@ -1,4 +1,4 @@
-package ru.otus;
+package homework;
 
 
 import java.util.Map;
