@@ -31,6 +31,14 @@ class CustomerTest {
 
         //then
         assertThat(factData).isEqualTo(expectedData);
+
+        //when
+        long newScoreSecond = customer.getScores() + 20;
+        customer.setScores(newScoreSecond);
+        String factDataSecond = map.get(customer);
+
+        //then
+        assertThat(factDataSecond).isEqualTo(expectedData);
     }
 
     @Test
