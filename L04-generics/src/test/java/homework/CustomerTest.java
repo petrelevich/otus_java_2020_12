@@ -66,6 +66,8 @@ class CustomerTest {
         Map.Entry<Customer, String> middleScore = customerService.getNext(new Customer(10, "Key", 20));
         //then
         assertThat(middleScore.getKey()).isEqualTo(customer1);
+        middleScore.getKey().setScores(10000);
+        middleScore.getKey().setName("Vasy");
 
         //when
         Map.Entry<Customer, String> biggestScore = customerService.getNext(middleScore.getKey());
