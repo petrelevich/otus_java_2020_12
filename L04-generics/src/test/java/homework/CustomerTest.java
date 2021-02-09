@@ -14,7 +14,6 @@ class CustomerTest {
     // Все тесты должны проходить, менять тесты не надо.
 
     @Test
-    @Disabled //эту аннотацию надо убрать
     @DisplayName("Объект Customer как ключ в карте")
     void customerAsKeyTest() {
         //given
@@ -42,7 +41,6 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled //эту аннотацию надо убрать
     @DisplayName("Сортировка по полю score, итерация по возрастанию")
     void scoreSortingTest() {
         //given
@@ -70,7 +68,7 @@ class CustomerTest {
         middleScore.getKey().setName("Vasy");
 
         //when
-        Map.Entry<Customer, String> biggestScore = customerService.getNext(middleScore.getKey());
+        Map.Entry<Customer, String> biggestScore = customerService.getNext(customer1);
         //then
         assertThat(biggestScore.getKey()).isEqualTo(customer3);
 
@@ -82,7 +80,6 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled //эту аннотацию надо убрать
     @DisplayName("Модификация коллекции")
     void mutationTest() {
         //given
@@ -104,7 +101,6 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled //эту аннотацию надо убрать
     @DisplayName("Возвращание в обратном порядке")
     void reverseOrderTest() {
         //given
