@@ -27,8 +27,10 @@ public class MonadExample {
     }
 
     private String function(String str) {
-        return Optional.ofNullable(str).map(val -> "!" + val.toUpperCase())
-                .map(param -> param + "+addStr").orElse("param is NULL");
+        return Optional.ofNullable(str)
+                .map(val -> "!" + val.toUpperCase())
+                .map(param -> param + "+addStr")
+                .orElse("param is NULL");
     }
 
     //некорректное использование монады
