@@ -1,7 +1,7 @@
 package functionalstyle;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MutationExamples {
 
