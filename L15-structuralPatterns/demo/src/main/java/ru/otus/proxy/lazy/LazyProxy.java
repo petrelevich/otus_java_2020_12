@@ -8,6 +8,7 @@ public class LazyProxy implements HeavyObject {
         this.heavyObject = heavyObject;
     }
 
+    @Override
     public String getValue() {
         if (!heavyObject.isInit()) {
             heavyObject.init("bigVal");
