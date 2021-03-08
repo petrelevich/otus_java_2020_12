@@ -18,11 +18,9 @@ class ProcessorTest {
     //Надо реализовать методы классов и убедиться, что тест проходит
 
     @Test
-    //@Disabled // Эту аннотацию надо убрать
+    @Disabled // Эту аннотацию надо убрать
     @DisplayName("Из файла читается json, обрабатывается, результат сериализуется в строку")
     void processingTest(@TempDir Path tempDir) throws IOException {
-
-
         System.out.println(tempDir);
 
         //given
