@@ -5,6 +5,7 @@ import ru.otus.core.model.Client;
 import ru.otus.core.sessionmanager.TransactionManager;
 import ru.otus.jdbc.DbExecutor;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,33 +14,31 @@ import java.util.Optional;
  */
 public class JdbcMapperClient implements ClientDao {
 
-    private final TransactionManager transactionManager;
     private final DbExecutor dbExecutor;
     private final EntitySQLMetaData entitySQLMetaData;
 
-    public JdbcMapperClient(TransactionManager transactionManager, DbExecutor dbExecutor, EntitySQLMetaData entitySQLMetaData) {
-        this.transactionManager = transactionManager;
+    public JdbcMapperClient(DbExecutor dbExecutor, EntitySQLMetaData entitySQLMetaData) {
         this.dbExecutor = dbExecutor;
         this.entitySQLMetaData = entitySQLMetaData;
     }
 
     @Override
-    public Optional<Client> findById(long id) {
+    public Optional<Client> findById(Connection connection, long id) {
         return Optional.empty();
     }
 
     @Override
-    public List<Client> findAll() {
+    public List<Client> findAll(Connection connection) {
         return null;
     }
 
     @Override
-    public long insert(Client client) {
+    public long insert(Connection connection, Client client) {
         return 0;
     }
 
     @Override
-    public void update(Client client) {
+    public void update(Connection connection, Client client) {
 
     }
 }

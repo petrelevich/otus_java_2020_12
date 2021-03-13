@@ -8,7 +8,6 @@ import ru.otus.core.model.Client;
 import ru.otus.core.service.DbServiceClientImpl;
 import ru.otus.demo.DataSourceDemo;
 import ru.otus.jdbc.DbExecutorImpl;
-import ru.otus.jdbc.dao.ClientDaoJdbc;
 import ru.otus.jdbc.mapper.EntityClassMetaData;
 import ru.otus.jdbc.mapper.EntitySQLMetaData;
 import ru.otus.jdbc.mapper.JdbcMapperClient;
@@ -29,10 +28,10 @@ public class HomeWork {
 // Работа с клиентом
         EntityClassMetaData entityClassMetaDataClient; // = new EntityClassMetaDataImpl();
         EntitySQLMetaData entitySQLMetaDataClient = null; //= new EntitySQLMetaDataImpl();
-        ClientDao clientDao = new JdbcMapperClient(transactionManager, dbExecutor, entitySQLMetaDataClient);
+        ClientDao clientDao = new JdbcMapperClient(dbExecutor, entitySQLMetaDataClient);
 
 // Код дальше должен остаться, т.е. clientDao должен использоваться
-        var dbServiceClient = new DbServiceClientImpl(clientDao);
+        var dbServiceClient = new DbServiceClientImpl(transactionManager, clientDao);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
 
         var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond"));

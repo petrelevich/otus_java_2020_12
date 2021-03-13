@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import ru.otus.core.model.Client;
 import ru.otus.core.service.DbServiceClientImpl;
 import ru.otus.demo.DataSourceDemo;
-import ru.otus.jdbc.DbExecutor;
 import ru.otus.jdbc.DbExecutorImpl;
 import ru.otus.jdbc.dao.ClientDaoJdbc;
 import ru.otus.jdbc.sessionmanager.TransactionManagerJdbc;
@@ -27,9 +26,9 @@ public class DbServiceDemo {
 
         var transactionManager = new TransactionManagerJdbc(dataSource);
         var dbExecutor = new DbExecutorImpl();
-        var clientDao = new ClientDaoJdbc(transactionManager, dbExecutor);
+        var clientDao = new ClientDaoJdbc(dbExecutor);
 
-        var dbServiceClient = new DbServiceClientImpl(clientDao);
+        var dbServiceClient = new DbServiceClientImpl(transactionManager, clientDao);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
 
         var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond"));
