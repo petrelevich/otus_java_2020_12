@@ -5,21 +5,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.core.repository.executor.DbExecutorImpl;
 import ru.otus.core.sessionmanager.TransactionManagerJdbc;
-import ru.otus.crm.datasource.DataSourceCrm;
+import ru.otus.crm.datasource.DriverManagerDataSource;
 import ru.otus.crm.model.Client;
 import ru.otus.crm.service.DbServiceClientImpl;
 import ru.otus.jdbc.mapper.EntityClassMetaData;
 import ru.otus.jdbc.mapper.EntitySQLMetaData;
-import ru.otus.jdbc.mapper.RepositoryJdbc;
+import ru.otus.jdbc.mapper.DataTemplateJdbc;
 
 import javax.sql.DataSource;
 
 public class HomeWork {
+    private static final String URL = "jdbc:postgresql://localhost:5430/demoDB";
+    private static final String USER = "usr";
+    private static final String PASSWORD = "pwd";
+
     private static final Logger log = LoggerFactory.getLogger(HomeWork.class);
 
     public static void main(String[] args) {
 // Общая часть
-        var dataSource = new DataSourceCrm();
+        var dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         flywayMigrations(dataSource);
         var transactionManager = new TransactionManagerJdbc(dataSource);
         var dbExecutor = new DbExecutorImpl();
@@ -27,7 +31,7 @@ public class HomeWork {
 // Работа с клиентом
         EntityClassMetaData entityClassMetaDataClient; // = new EntityClassMetaDataImpl();
         EntitySQLMetaData entitySQLMetaDataClient = null; //= new EntitySQLMetaDataImpl();
-        var clientRepository = new RepositoryJdbc<Client>(dbExecutor, entitySQLMetaDataClient, Client.class);
+        var clientRepository = new DataTemplateJdbc<Client>(dbExecutor, entitySQLMetaDataClient, Client.class);
 
 // Код дальше должен остаться, т.е. clientDao должен использоваться
         var dbServiceClient = new DbServiceClientImpl(transactionManager, clientRepository);

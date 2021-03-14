@@ -7,21 +7,27 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-public class DataSourceCrm implements DataSource {
-    private static final String URL = "jdbc:postgresql://localhost:5430/demoDB";
-    private static final String USER = "usr";
-    private static final String PASSWORD = "pwd";
+public class DriverManagerDataSource implements DataSource {
+    private final String url;
+    private final String user;
+    private final String pwd;
+
+    public DriverManagerDataSource(String url, String user, String pwd) {
+        this.url = url;
+        this.user = user;
+        this.pwd = pwd;
+    }
 
     @Override
     public Connection getConnection() throws SQLException {
-        var connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        var connection = DriverManager.getConnection(url, user, pwd);
         connection.setAutoCommit(false);
         return connection;
     }
 
     @Override
     public Connection getConnection(String username, String password) throws SQLException {
-        var connection = DriverManager.getConnection(URL, username, password);
+        var connection = DriverManager.getConnection(url, username, password);
         connection.setAutoCommit(false);
         return connection;
     }

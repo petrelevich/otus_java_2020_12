@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-public interface Repository<T> {
+public interface DataTemplate<T> {
     Optional<T> findById(Connection connection, long id);
 
     List<T> findAll(Connection connection);

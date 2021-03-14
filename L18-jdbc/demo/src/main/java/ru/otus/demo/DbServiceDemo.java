@@ -5,23 +5,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.crm.model.Client;
 import ru.otus.crm.service.DbServiceClientImpl;
-import ru.otus.crm.datasource.DataSourceCrm;
+import ru.otus.crm.datasource.DriverManagerDataSource;
 import ru.otus.core.repository.executor.DbExecutorImpl;
-import ru.otus.crm.repository.ClientRepositoryJdbc;
+import ru.otus.crm.repository.ClientDataTemplateJdbc;
 import ru.otus.core.sessionmanager.TransactionManagerJdbc;
 
 import javax.sql.DataSource;
 
 public class DbServiceDemo {
+    private static final String URL = "jdbc:postgresql://localhost:5430/demoDB";
+    private static final String USER = "usr";
+    private static final String PASSWORD = "pwd";
+
     private static final Logger log = LoggerFactory.getLogger(DbServiceDemo.class);
 
     public static void main(String[] args) {
-        var dataSource = new DataSourceCrm();
+        var dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         flywayMigrations(dataSource);
 
         var transactionManager = new TransactionManagerJdbc(dataSource);
         var dbExecutor = new DbExecutorImpl();
-        var clientDao = new ClientRepositoryJdbc(dbExecutor);
+        var clientDao = new ClientDataTemplateJdbc(dbExecutor);
 
         var dbServiceClient = new DbServiceClientImpl(transactionManager, clientDao);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
