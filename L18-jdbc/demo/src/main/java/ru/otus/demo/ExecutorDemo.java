@@ -24,7 +24,7 @@ public class ExecutorDemo {
         var dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         flywayMigrations(dataSource);
 
-        try (Connection connection = dataSource.getConnection()) {
+        try (var connection = dataSource.getConnection()) {
             var executor = new DbExecutorImpl();
             var clientId = executor.executeStatement(connection, "insert into client(name) values (?)",
                     Collections.singletonList("testUserName"));

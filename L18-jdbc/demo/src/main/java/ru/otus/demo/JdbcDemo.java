@@ -19,7 +19,7 @@ public class JdbcDemo {
     public static void main(String[] args) throws SQLException {
         var dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         flywayMigrations(dataSource);
-        JdbcDemo demo = new JdbcDemo();
+        var demo = new JdbcDemo();
         try (var connection = dataSource.getConnection()) {
             int id = 1;
             demo.insertRecord(connection, id);

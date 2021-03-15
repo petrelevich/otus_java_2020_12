@@ -20,9 +20,7 @@ public class DriverManagerDataSource implements DataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
-        var connection = DriverManager.getConnection(url, user, pwd);
-        connection.setAutoCommit(false);
-        return connection;
+        return getConnection(user, pwd);
     }
 
     @Override

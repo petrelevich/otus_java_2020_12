@@ -22,19 +22,20 @@ public class DbServiceDemo {
     public static void main(String[] args) {
         var dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         flywayMigrations(dataSource);
-
         var transactionManager = new TransactionManagerJdbc(dataSource);
         var dbExecutor = new DbExecutorImpl();
-        var clientDao = new ClientDataTemplateJdbc(dbExecutor);
+///
+        var clientTemplate = new ClientDataTemplateJdbc(dbExecutor);
 
-        var dbServiceClient = new DbServiceClientImpl(transactionManager, clientDao);
+///
+        var dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
 
         var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond"));
         var clientSecondSelected = dbServiceClient.getClient(clientSecond.getId())
                 .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecond.getId()));
         log.info("clientSecondSelected:{}", clientSecondSelected);
-
+///
         dbServiceClient.saveClient(new Client(clientSecondSelected.getId(), "dbServiceSecondUpdated"));
         var clientUpdated = dbServiceClient.getClient(clientSecondSelected.getId())
                 .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecondSelected.getId()));
@@ -42,7 +43,6 @@ public class DbServiceDemo {
 
         log.info("All clients");
         dbServiceClient.findAll().forEach(client -> log.info("client:{}", client));
-
     }
 
     private static void flywayMigrations(DataSource dataSource) {

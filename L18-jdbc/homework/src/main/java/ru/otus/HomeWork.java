@@ -31,10 +31,10 @@ public class HomeWork {
 // Работа с клиентом
         EntityClassMetaData entityClassMetaDataClient; // = new EntityClassMetaDataImpl();
         EntitySQLMetaData entitySQLMetaDataClient = null; //= new EntitySQLMetaDataImpl();
-        var clientRepository = new DataTemplateJdbc<Client>(dbExecutor, entitySQLMetaDataClient, Client.class);
+        var dataTemplate = new DataTemplateJdbc<Client>(dbExecutor, entitySQLMetaDataClient, Client.class);
 
 // Код дальше должен остаться, т.е. clientDao должен использоваться
-        var dbServiceClient = new DbServiceClientImpl(transactionManager, clientRepository);
+        var dbServiceClient = new DbServiceClientImpl(transactionManager, dataTemplate);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
 
         var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond"));

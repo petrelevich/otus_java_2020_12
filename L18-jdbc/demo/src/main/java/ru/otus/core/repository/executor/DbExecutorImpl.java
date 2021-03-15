@@ -15,11 +15,11 @@ public class DbExecutorImpl implements DbExecutor {
     @Override
     public long executeStatement(Connection connection, String sql, List<Object> params) {
         try (var pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            for (int idx = 0; idx < params.size(); idx++) {
+            for (var idx = 0; idx < params.size(); idx++) {
                 pst.setObject(idx + 1, params.get(idx));
             }
             pst.executeUpdate();
-            try (ResultSet rs = pst.getGeneratedKeys()) {
+            try (var rs = pst.getGeneratedKeys()) {
                 rs.next();
                 return rs.getInt(1);
             }
@@ -31,7 +31,7 @@ public class DbExecutorImpl implements DbExecutor {
     @Override
     public <T> Optional<T> executeSelect(Connection connection, String sql, List<Object> params, Function<ResultSet, T> rsHandler) {
         try (var pst = connection.prepareStatement(sql)) {
-            for (int idx = 0; idx < params.size(); idx++) {
+            for (var idx = 0; idx < params.size(); idx++) {
                 pst.setObject(idx + 1, params.get(idx));
             }
             try (var rs = pst.executeQuery()) {
