@@ -25,8 +25,8 @@ idea {
 
 sourceSets {
     main {
-        java {
-           include protoSrcDir
+        proto {
+            srcDir protoSrcDir
         }
     }
 }
