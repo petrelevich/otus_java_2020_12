@@ -3,17 +3,21 @@ package ru.otus.demo;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.otus.crm.datasource.DataSourceCrm;
+import ru.otus.crm.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class JdbcDemo {
+    private static final String URL = "jdbc:postgresql://localhost:5430/demoDB";
+    private static final String USER = "usr";
+    private static final String PASSWORD = "pwd";
+
     private static final Logger logger = LoggerFactory.getLogger(JdbcDemo.class);
 
     public static void main(String[] args) throws SQLException {
-        var dataSource = new DataSourceCrm();
+        var dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         flywayMigrations(dataSource);
         JdbcDemo demo = new JdbcDemo();
         try (var connection = dataSource.getConnection()) {

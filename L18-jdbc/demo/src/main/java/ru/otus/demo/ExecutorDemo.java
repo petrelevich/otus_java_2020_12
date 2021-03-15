@@ -4,8 +4,7 @@ import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.crm.model.Client;
-import ru.otus.crm.datasource.DataSourceCrm;
-import ru.otus.core.repository.executor.DbExecutor;
+import ru.otus.crm.datasource.DriverManagerDataSource;
 import ru.otus.core.repository.executor.DbExecutorImpl;
 
 import javax.sql.DataSource;
@@ -13,13 +12,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public class ExecutorDemo {
+    private static final String URL = "jdbc:postgresql://localhost:5430/demoDB";
+    private static final String USER = "usr";
+    private static final String PASSWORD = "pwd";
+
     private static final Logger log = LoggerFactory.getLogger(ExecutorDemo.class);
 
     public static void main(String[] args) throws SQLException {
-        var dataSource = new DataSourceCrm();
+        var dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         flywayMigrations(dataSource);
 
         try (Connection connection = dataSource.getConnection()) {

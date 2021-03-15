@@ -1,7 +1,7 @@
 package ru.otus.crm.repository;
 
-import ru.otus.core.repository.Repository;
-import ru.otus.core.repository.RepositoryException;
+import ru.otus.core.repository.DataTemplate;
+import ru.otus.core.repository.DataTemplateException;
 import ru.otus.crm.model.Client;
 import ru.otus.core.repository.executor.DbExecutor;
 
@@ -12,11 +12,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class ClientRepositoryJdbc implements Repository<Client> {
+public class ClientDataTemplateJdbc implements DataTemplate<Client> {
 
     private final DbExecutor dbExecutor;
 
-    public ClientRepositoryJdbc(DbExecutor dbExecutor) {
+    public ClientDataTemplateJdbc(DbExecutor dbExecutor) {
         this.dbExecutor = dbExecutor;
     }
 
@@ -29,7 +29,7 @@ public class ClientRepositoryJdbc implements Repository<Client> {
                 }
                 return null;
             } catch (SQLException e) {
-                throw new RepositoryException(e);
+                throw new DataTemplateException(e);
             }
         });
     }
@@ -44,7 +44,7 @@ public class ClientRepositoryJdbc implements Repository<Client> {
                 }
                 return clientList;
             } catch (SQLException e) {
-                throw new RepositoryException(e);
+                throw new DataTemplateException(e);
             }
         }).orElseThrow(() -> new RuntimeException("Unexpected error"));
     }
@@ -55,7 +55,7 @@ public class ClientRepositoryJdbc implements Repository<Client> {
             return dbExecutor.executeStatement(connection, "insert into client(name) values (?)",
                     Collections.singletonList(client.getName()));
         } catch (Exception e) {
-            throw new RepositoryException(e);
+            throw new DataTemplateException(e);
         }
     }
 
@@ -65,7 +65,7 @@ public class ClientRepositoryJdbc implements Repository<Client> {
             dbExecutor.executeStatement(connection, "update client set name = ? where id = ?",
                     List.of(client.getName(), client.getId()));
         } catch (Exception e) {
-            throw new RepositoryException(e);
+            throw new DataTemplateException(e);
         }
     }
 }

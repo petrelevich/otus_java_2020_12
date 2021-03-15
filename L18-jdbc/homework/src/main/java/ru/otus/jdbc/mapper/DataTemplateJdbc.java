@@ -1,6 +1,6 @@
 package ru.otus.jdbc.mapper;
 
-import ru.otus.core.repository.Repository;
+import ru.otus.core.repository.DataTemplate;
 import ru.otus.core.repository.executor.DbExecutor;
 
 import java.sql.Connection;
@@ -10,13 +10,13 @@ import java.util.Optional;
 /**
  * Сохратяет объект в базу, читает объект из базы
  */
-public class RepositoryJdbc<T> implements Repository<T> {
+public class DataTemplateJdbc<T> implements DataTemplate<T> {
 
     private final DbExecutor dbExecutor;
     private final EntitySQLMetaData entitySQLMetaData;
     private final Class<?> clazz;
 
-    public RepositoryJdbc(DbExecutor dbExecutor, EntitySQLMetaData entitySQLMetaData, Class<?> clazz) {
+    public DataTemplateJdbc(DbExecutor dbExecutor, EntitySQLMetaData entitySQLMetaData, Class<?> clazz) {
         this.dbExecutor = dbExecutor;
         this.entitySQLMetaData = entitySQLMetaData;
         this.clazz = clazz;
