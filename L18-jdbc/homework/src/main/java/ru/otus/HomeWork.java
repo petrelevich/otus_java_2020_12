@@ -33,7 +33,7 @@ public class HomeWork {
         EntitySQLMetaData entitySQLMetaDataClient = null; //= new EntitySQLMetaDataImpl();
         var dataTemplate = new DataTemplateJdbc<Client>(dbExecutor, entitySQLMetaDataClient, Client.class);
 
-// Код дальше должен остаться, т.е. clientDao должен использоваться
+// Код дальше должен остаться
         var dbServiceClient = new DbServiceClientImpl(transactionManager, dataTemplate);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
 

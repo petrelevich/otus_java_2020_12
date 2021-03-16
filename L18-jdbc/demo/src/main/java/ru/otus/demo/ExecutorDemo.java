@@ -8,7 +8,6 @@ import ru.otus.crm.datasource.DriverManagerDataSource;
 import ru.otus.core.repository.executor.DbExecutorImpl;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
