@@ -24,6 +24,8 @@ SELECT * FROM actor;
 
 -- Создаем тестовую таблицу
 DROP TABLE IF EXISTS foo;
+DROP TABLE IF EXISTS bar;
+
 CREATE TABLE foo (c1 integer, c2 text);
 
 INSERT INTO foo
@@ -45,6 +47,7 @@ FROM generate_series(1, 10) AS i;
 
 -- Опять выполним запрос
 SELECT count(*) FROM foo;
+
 EXPLAIN
 SELECT * FROM foo;
 -- Видим старое значение estimated rows
@@ -74,8 +77,13 @@ SELECT * FROM foo WHERE c1 > 500;
 -- Seq Scan, т.к. индексов нет.
 -- Filter: (c1 > 500)
 -- Rows Removed by Filter: 510
--- (cost=0.00..20834.38 rows=999523 width=37) (actual time=0.168..454.000 rows=999500 loops=1)
--- Execution time: 621.078 ms
+
+-- Seq Scan on foo  (cost=0.00..20834.12 rows=999541 width=37) (actual time=1.312..2344.030 rows=999500 loops=1)
+--   Filter: (c1 > 500)
+--   Rows Removed by Filter: 510
+-- Planning time: 0.104 ms
+-- Execution time: 3170.731 ms
+
 
 -- ------------
 -- Индексы
@@ -89,8 +97,11 @@ SELECT * FROM foo WHERE c1 > 500;
 
 -- Отфильтровано 510 строк из более чем миллиона (Rows Removed by Filter: 510)
 
--- Seq Scan on foo  (cost=0.00..20834.12 rows=999533 width=37) (actual time=4.691..7513.423 rows=999500 loops=1)
--- Execution time: 10595.238 ms
+-- Seq Scan on foo  (cost=0.00..20834.12 rows=999533 width=37) (actual time=0.510..2658.878 rows=999500 loops=1)
+--   Filter: (c1 > 500)
+--   Rows Removed by Filter: 510
+-- Planning time: 0.677 ms
+-- Execution time: 3520.871 ms
 
 -- Запретим Seq Scan и попробуем использовать индекс принудительно:
 SET enable_seqscan TO off;
@@ -193,8 +204,12 @@ FROM foo
 JOIN bar ON foo.c1 = bar.c1;
 -- Hash Join
 -- Запомним стоимость и время:
--- Hash Join  (cost=30834.22..46029.24 rows=546611 width=42) (actual time=4225.109..8614.594 rows=500010 loops=1)
--- Execution time: 9121.507 ms
+-- ->  Seq Scan on foo  (cost=0.00..18334.10 rows=1000010 width=37) (actual time=0.049..1572.154 rows=1000010 loops=1)
+--   ->  Hash  (cost=7213.00..7213.00 rows=500000 width=5) (actual time=2111.893..2111.893 rows=500000 loops=1)
+--         Buckets: 524288  Batches: 1  Memory Usage: 22163kB
+--         ->  Seq Scan on bar  (cost=0.00..7213.00 rows=500000 width=5) (actual time=0.081..844.095 rows=500000 loops=1)
+-- Planning time: 1.289 ms
+-- Execution time: 8370.692 ms
 
 -- Добавим индексы
 CREATE INDEX ON foo(c1); -- этот мы удаляли
@@ -208,3 +223,10 @@ JOIN bar ON foo.c1 = bar.c1;
 
 DROP INDEX foo_c1_idx; -- этот мы удаляли
 DROP INDEX bar_c1_idx;
+
+-- Merge Join  (cost=2.03..39787.09 rows=500000 width=42) (actual time=0.335..6107.047 rows=500010 loops=1)
+--   Merge Cond: (foo.c1 = bar.c1)
+--   ->  Index Scan using foo_c1_idx on foo  (cost=0.42..34317.58 rows=1000010 width=37) (actual time=0.283..1469.190 rows=500011 loops=1)
+--   ->  Index Scan using bar_c1_idx on bar  (cost=0.42..15212.42 rows=500000 width=5) (actual time=0.042..1431.064 rows=500010 loops=1)
+-- Planning time: 2.692 ms
+-- Execution time: 6533.678 ms
