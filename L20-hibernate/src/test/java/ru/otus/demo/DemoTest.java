@@ -16,12 +16,11 @@ import javax.persistence.Query;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.Assert.assertThrows;
 
 
 @DisplayName("Демо работы с hibernate (без абстракций) должно ")
-class WithoutAbstractionsTest extends AbstractHibernateTest {
+class DemoTest extends AbstractHibernateTest {
 
     @DisplayName(" корректно сохранять и загружать клиента выполняя заданное кол-во запросов в нужное время")
     @ParameterizedTest(name = "клиент отключен от контекста (detached) перед загрузкой: {0}")
