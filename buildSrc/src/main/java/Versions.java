@@ -8,4 +8,5 @@ public interface Versions {
 
     String flyway = "6.4.4";
     String postgresql = "42.2.5";
+    String testcontainers = "1.14.3";
 }
