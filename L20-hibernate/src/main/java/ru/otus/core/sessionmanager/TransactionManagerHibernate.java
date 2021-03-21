@@ -12,7 +12,7 @@ public class TransactionManagerHibernate implements TransactionManager {
 
     @Override
     public <T> T doInTransaction(TransactionAction<T> action) {
-        return notTrowAction(() -> {
+        return wrapException(() -> {
             try (var session = sessionFactory.openSession()) {
                 var transaction = session.beginTransaction();
                 try {
@@ -21,17 +21,17 @@ public class TransactionManagerHibernate implements TransactionManager {
                     return result;
                 } catch (Exception ex) {
                     transaction.rollback();
-                    throw new DataBaseOperationException("doInTransaction exception", ex);
+                    throw ex;
                 }
             }
         });
     }
 
-    private <T> T notTrowAction(Callable<T> action) {
+    private <T> T wrapException(Callable<T> action) {
         try {
             return action.call();
         } catch (Exception ex) {
-            throw new DataBaseOperationException("exception", ex);
+            throw new DataBaseOperationException("Exception in transaction", ex);
         }
     }
 }

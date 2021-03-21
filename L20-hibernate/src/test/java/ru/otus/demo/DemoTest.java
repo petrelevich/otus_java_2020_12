@@ -276,39 +276,6 @@ class DemoTest extends AbstractHibernateTest {
         assertThat(loadedClient.getName()).isEqualTo(updatedName);
     }
 
-    @DisplayName(" показывать, что удаленный через HQL persistent объект остается в сессии, но удаляется в БД")
-    @Test
-    void shouldNotDetachPersistentEntityWhenRemoveWithHQLQuery() {
-        var savedClient = new Client("Ivan");
-        try (var session = sessionFactory.openSession()) {
-            session.beginTransaction();
-
-            // Сохранили клиента в рамках текущей сессии. Теперь у него state = persistent
-            session.save(savedClient);
-
-            // Удалили клиента с помощью запроса
-            Query query = session.createQuery("delete from Client u where u.id = ?1");
-            query.setParameter(1, savedClient.getId());
-            query.executeUpdate();
-
-            // Загрузили клиента
-            var loadedClient = session.get(Client.class, savedClient.getId());
-            // Проверка, что загруженный клиент не null и равен сохраненному ранее
-            assertThat(loadedClient).isNotNull().usingRecursiveComparison().isEqualTo(savedClient);
-
-            // Отсоединили клиента от контекста
-            session.detach(savedClient);
-
-            // Загрузили клиента еще раз
-            loadedClient = session.get(Client.class, savedClient.getId());
-
-            // Проверка, что загруженный клиент null
-            assertThat(loadedClient).isNull();
-
-            session.getTransaction().commit();
-        }
-    }
-
     private void saveClient(Session session, Client client) {
         session.beginTransaction();
         session.save(client);
