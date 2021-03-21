@@ -9,7 +9,7 @@ public interface DataTemplate<T> {
 
     List<T> findAll(Connection connection);
 
-    long insert(Connection connection, T client);
+    long insert(Connection connection, T object);
 
-    void update(Connection connection, T client);
+    void update(Connection connection, T object);
 }
