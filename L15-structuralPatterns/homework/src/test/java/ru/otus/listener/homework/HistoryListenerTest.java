@@ -17,7 +17,7 @@ class HistoryListenerTest {
         //given
         var historyListener = new HistoryListener();
 
-        var id = 1L;
+        var id = 100L;
         var data = "33";
         var field13 =  new ObjectForMessage();
         field13.setData(List.of(data));
