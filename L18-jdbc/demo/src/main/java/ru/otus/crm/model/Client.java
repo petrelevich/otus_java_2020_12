@@ -1,16 +1,19 @@
 package ru.otus.crm.model;
 
 public class Client {
-    private final Long id;
-    private final String name;
+    private Long id;
+    private String name;
 
-    public Client(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    public Client() {
     }
 
     public Client(String name) {
         this.id = null;
+        this.name = name;
+    }
+
+    public Client(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -20,6 +23,14 @@ public class Client {
 
     public String getName() {
         return name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
