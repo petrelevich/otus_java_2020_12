@@ -27,8 +27,12 @@ class HistoryListenerTest {
 //TODO: раскоментировать       .field13(field13)
                 .build();
 
+        var messageB = new Message.Builder(12L)
+                .field10("field10")
+                .build();
+
         //when
-        historyListener.onUpdated(message, message);
+        historyListener.onUpdated(message, messageB);
 //TODO: раскоментировать        message.getField13().setData(new ArrayList<>()); //меняем исходное сообщение
 
         //then
