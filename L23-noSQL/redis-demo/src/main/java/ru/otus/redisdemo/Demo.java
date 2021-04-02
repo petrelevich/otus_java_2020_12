@@ -20,7 +20,7 @@ public class Demo {
     public static void main(String[] args) throws Throwable {
         val motorolaC350 = new Phone(UUID.randomUUID().toString(),
                 "C350", "silver", "000001");
-        val motorolaZ800i = new Phone(UUID.randomUUID().toString(),
+        val sonyEricssonZ800i = new Phone(UUID.randomUUID().toString(),
                 "Z800i", "silver", "000002");
         val huaweiP20 = new SmartPhone(UUID.randomUUID().toString(),
                 "p20", "black", "000003", "Android");
@@ -32,7 +32,7 @@ public class Demo {
         jedis.flushAll();
 
         redisTemplate.insert(motorolaC350.getId(), motorolaC350);
-        redisTemplate.insert(motorolaZ800i.getId(), motorolaZ800i);
+        redisTemplate.insert(sonyEricssonZ800i.getId(), sonyEricssonZ800i);
         redisTemplate.insert(huaweiP20.getId(), huaweiP20);
 
 
@@ -41,7 +41,7 @@ public class Demo {
 
         System.out.println("\n");
 
-        val motorolaZ800iOptional = redisTemplate.findOne(motorolaZ800i.getId(), Phone.class);
+        val motorolaZ800iOptional = redisTemplate.findOne(sonyEricssonZ800i.getId(), Phone.class);
         motorolaZ800iOptional.ifPresent(sm -> System.out.printf("Phone from db is:\n%s", sm));
 
         System.out.println("\n");

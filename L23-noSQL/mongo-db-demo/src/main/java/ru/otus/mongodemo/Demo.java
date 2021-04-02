@@ -29,7 +29,7 @@ public class Demo {
     public static void main(String[] args) throws Throwable {
         val motorolaC350 = new Phone(null,
                 "C350", "silver", "000001");
-        val motorolaZ800i = new Phone(null,
+        val sonyEricssonZ800i = new Phone(null,
                 "Z800i", "silver", "000002");
         val huaweiP20 = new SmartPhone(null,
                 "p20", "black", "000003", "Android");
@@ -48,13 +48,13 @@ public class Demo {
 
         try (val mongoClient = MongoClients.create(clientSettings)) {
             val database = mongoClient.getDatabase(MONGO_DATABASE_NAME);
-            val collection = database.getCollection(PHONES_COLLECTION_NAME, Phone.class);
+            val collection = database.getCollection(PHONES_COLLECTION_NAME);
 
             database.drop();
 
             val mongoTemplate = new MongoTemplateImpl(PHONES_COLLECTION_NAME, database);
             mongoTemplate.insert(motorolaC350);
-            mongoTemplate.insert(motorolaZ800i);
+            mongoTemplate.insert(sonyEricssonZ800i);
             mongoTemplate.insert(huaweiP20);
 
             val huaweiP20Optional = mongoTemplate.findOne(huaweiP20.getId(), SmartPhone.class);
@@ -68,6 +68,8 @@ public class Demo {
                     .map(Objects::toString).collect(Collectors.joining("\n")));
 
             System.out.println();
+
+            collection.insertOne(Document.parse("{\"model\":\"Sasha Stetsenko\", \"color\": \"white\"}"));
 
             val allPhones = mongoTemplate.findAll(Phone.class);
             System.out.println("All phones from db:\n" + allPhones.stream()

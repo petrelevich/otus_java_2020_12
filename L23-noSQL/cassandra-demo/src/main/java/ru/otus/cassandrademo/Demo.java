@@ -20,7 +20,7 @@ public class Demo {
     public static void main(String[] args) throws Throwable {
         val motorolaC350 = new Phone(UUID.randomUUID(), "C350",
                 "silver", "000001");
-        val motorolaZ800i = new Phone(UUID.randomUUID(), "Z800i",
+        val sonyEricssonZ800i = new Phone(UUID.randomUUID(), "Z800i",
                 "silver", "000002");
         val huaweiP20 = new SmartPhone(UUID.randomUUID(),"p20",
                 "black", "000003", "Android");
@@ -34,7 +34,7 @@ public class Demo {
             initializer.initSchema();
 
             repository.insert(motorolaC350, Phone.class);
-            repository.insert(motorolaZ800i, Phone.class);
+            repository.insert(sonyEricssonZ800i, Phone.class);
             repository.insert(huaweiP20, SmartPhone.class);
 
             System.out.println("\n");
@@ -45,7 +45,7 @@ public class Demo {
 
             System.out.println("\n");
 
-            val motorolaZ800iOptional = repository.findOne(motorolaZ800i.getId(), Phone.class);
+            val motorolaZ800iOptional = repository.findOne(sonyEricssonZ800i.getId(), Phone.class);
             motorolaZ800iOptional.ifPresent(sm ->
                     System.out.printf("Phone from db is:\n%s", sm));
 

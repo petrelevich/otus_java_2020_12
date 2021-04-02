@@ -23,13 +23,13 @@ public class Demo {
     public static void main(String[] args) throws Throwable {
         val motorolaC350 = new Phone(UUID.randomUUID().toString(),
                 "C350", "silver", "000001");
-        val motorolaZ800i = new Phone(UUID.randomUUID().toString(),
+        val sonyEricssonZ800i = new Phone(UUID.randomUUID().toString(),
                 "Z800i", "silver", "000002");
         val huaweiP20 = new Phone(UUID.randomUUID().toString(),
                 "p20", "black", "000003");
 
         val vasya = new PhoneUser(UUID.randomUUID().toString(),
-                "Vasya", List.of(motorolaC350, motorolaZ800i));
+                "Vasya", List.of(motorolaC350, sonyEricssonZ800i));
         val anya = new PhoneUser(UUID.randomUUID().toString(),
                 "Anya", List.of(huaweiP20));
 
@@ -42,7 +42,7 @@ public class Demo {
             PhoneUserRepository phoneUserRepository = new Neo4jPhoneUserRepository(driver, mapper, phoneRepository);
 
             phoneRepository.insert(motorolaC350);
-            phoneRepository.insert(motorolaZ800i);
+            phoneRepository.insert(sonyEricssonZ800i);
             phoneRepository.insert(huaweiP20);
 
             phoneUserRepository.insert(vasya);
@@ -50,7 +50,7 @@ public class Demo {
 
             System.out.println("\n");
 
-            Optional<Phone> motorolaZ800iOptional = phoneRepository.findOne(motorolaZ800i.getId());
+            Optional<Phone> motorolaZ800iOptional = phoneRepository.findOne(sonyEricssonZ800i.getId());
             motorolaZ800iOptional.ifPresent(p -> System.out.printf("Phone from db is:\n%s", p));
 
             System.out.println("\n");
