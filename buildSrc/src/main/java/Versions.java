@@ -21,4 +21,9 @@ public interface Versions {
     String cassandra = "4.11.0";
     String neo4j = "4.2.4";
     String jedis = "3.5.2";
+
+    String jetty = "11.0.2";
+    String freemarker = "2.3.31";
+    String reflections = "0.9.12";
+
 }
