@@ -6,7 +6,7 @@ PostgreSQL разворачивается в Docker с демо-базой `dvdr
 * `cd <эта_директория>`
 * `docker-compose up -d`
 * PgAdmin 4
-    * http://locahost:9090 (Linux, Windows Docker **Desktop**) \
+    * http://localhost:9090 (Linux, Windows Docker **Desktop**) \
       или
     * http://192.168.99.104:9090 (Windows Docker **Toolbox**, IP может быть другой - посмотреть можно через `docker-machine ip`)
 * PostgreSQL снаружи на порту `5432`
