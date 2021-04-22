@@ -1,7 +1,7 @@
 plugins {
     //support Idea IDE
     id 'idea'
-    id "io.spring.dependency-management" version "1.0.10.RELEASE"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
     // Build uber-jar
     id 'com.github.johnrengelman.shadow' version '6.1.0' apply false
 }
@@ -20,6 +20,7 @@ allprojects {
     group "ru.otus"
 
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 
@@ -27,7 +28,7 @@ allprojects {
     dependencyManagement {
         dependencies {
             imports {
-                mavenBom("org.springframework.boot:spring-boot-dependencies:2.3.1.RELEASE")
+                mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.5")
             }
             dependency("com.google.guava:guava:${Versions.guava}")
             dependency("org.openjdk.jmh:jmh-core:${Versions.jmh}")
@@ -38,6 +39,9 @@ allprojects {
             dependency("com.google.protobuf:protobuf-java-util:${Versions.protobuf}")
             dependency("org.testcontainers:junit-jupiter:${Versions.testcontainers}")
             dependency("org.testcontainers:postgresql:${Versions.testcontainers}")
+            dependency("org.webjars:sockjs-client:${Versions.sockjs}")
+            dependency("org.webjars:stomp-websocket:${Versions.stomp}")
+            dependency("org.webjars:bootstrap:${Versions.bootstrap}")
         }
     }
 

@@ -10,11 +10,8 @@ public interface Versions {
     String postgresql = "42.2.5";
     String testcontainers = "1.14.3";
 
-
-
     String lombok = "1.18.20";
     String gson = "2.8.6";
-
 
     String mongodb = "4.2.2";
     String mongodbReactive = "4.2.2";
@@ -26,4 +23,7 @@ public interface Versions {
     String freemarker = "2.3.31";
     String reflections = "0.9.12";
 
+    String sockjs = "1.1.2";
+    String stomp = "2.3.3-1";
+    String bootstrap = "4.4.1-1";
 }

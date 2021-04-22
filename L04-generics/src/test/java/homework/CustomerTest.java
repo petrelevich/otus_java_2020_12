@@ -12,8 +12,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class CustomerTest {
 
     // Все тесты должны проходить, менять тесты не надо.
-
     @Test
+    @Disabled //надо удалить
     @DisplayName("Объект Customer как ключ в карте")
     void customerAsKeyTest() {
         //given
@@ -41,6 +41,7 @@ class CustomerTest {
     }
 
     @Test
+    @Disabled //надо удалить
     @DisplayName("Сортировка по полю score, итерация по возрастанию")
     void scoreSortingTest() {
         //given
@@ -80,6 +81,7 @@ class CustomerTest {
     }
 
     @Test
+    @Disabled //надо удалить
     @DisplayName("Модификация коллекции")
     void mutationTest() {
         //given
@@ -101,6 +103,7 @@ class CustomerTest {
     }
 
     @Test
+    @Disabled //надо удалить
     @DisplayName("Возвращание в обратном порядке")
     void reverseOrderTest() {
         //given
