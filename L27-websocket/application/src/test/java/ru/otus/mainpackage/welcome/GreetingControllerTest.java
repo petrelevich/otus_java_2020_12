@@ -10,8 +10,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.otus.mainpackage.configs.MessageConfig;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,6 +26,9 @@ class GreetingControllerTest {
     @MockBean
     private GreetingService greetingService;
 
+    @MockBean(name = "messageConfig")
+    MessageConfig messageConfig;
+
     @Test
     void sayHelloTest() throws Exception {
         String name = "Mr.Test";
@@ -38,7 +41,7 @@ class GreetingControllerTest {
                 .andReturn()
                 .getResponse();
 
-        verify(greetingService, times(1)).sayHello(name);
+        verify(greetingService).sayHello(name);
         System.out.println();
         assertThat(result.getContentAsString()).isEqualTo(expectedResult);
     }
@@ -55,7 +58,7 @@ class GreetingControllerTest {
                 .andReturn()
                 .getResponse();
 
-        verify(greetingService, times(1)).sayHello(name);
+        verify(greetingService).sayHello(name);
         System.out.println();
         assertThat(result.getContentAsString()).isEqualTo(expectedResult);
     }
