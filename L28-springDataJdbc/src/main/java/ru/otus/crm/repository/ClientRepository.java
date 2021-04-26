@@ -1,0 +1,20 @@
+package ru.otus.crm.repository;
+
+import org.springframework.data.jdbc.repository.query.Modifying;
+import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import ru.otus.crm.model.Client;
+
+import java.util.Optional;
+
+
+public interface ClientRepository extends CrudRepository<Client, Long> {
+
+    @Query("select * from client where name = :name")
+    Optional<Client> findByName(@Param("name") String name);
+
+    @Modifying
+    @Query("update client set name = :newName where id = :id")
+    void updateName(@Param("id") long id, @Param("newName") String newName);
+}

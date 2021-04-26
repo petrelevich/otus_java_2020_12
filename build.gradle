@@ -42,6 +42,7 @@ allprojects {
             dependency("org.webjars:sockjs-client:${Versions.sockjs}")
             dependency("org.webjars:stomp-websocket:${Versions.stomp}")
             dependency("org.webjars:bootstrap:${Versions.bootstrap}")
+            dependency("com.google.code.findbugs:jsr305:${Versions.jsr305}")
         }
     }
 

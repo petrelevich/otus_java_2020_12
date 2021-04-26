@@ -26,4 +26,6 @@ public interface Versions {
     String sockjs = "1.1.2";
     String stomp = "2.3.3-1";
     String bootstrap = "4.4.1-1";
+
+    String jsr305 = "3.0.2";
 }
