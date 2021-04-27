@@ -41,6 +41,7 @@ public class Manager implements Persistable<String> {
         return isNew;
     }
 
+    @Override
     public String getId() {
         return id;
     }
