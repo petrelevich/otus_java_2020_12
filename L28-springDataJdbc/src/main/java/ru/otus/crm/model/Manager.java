@@ -22,7 +22,7 @@ public class Manager implements Persistable<String> {
     private final Set<Client> clients;
 
     @Transient
-    boolean isNew;
+    private final boolean isNew;
 
     public Manager(String id, String label, Set<Client> clients, boolean isNew) {
         this.id = id;
