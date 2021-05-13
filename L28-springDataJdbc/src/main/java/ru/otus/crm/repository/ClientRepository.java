@@ -11,8 +11,11 @@ import java.util.Optional;
 
 public interface ClientRepository extends CrudRepository<Client, Long> {
 
-    @Query("select * from client where name = :name")
+
     Optional<Client> findByName(@Param("name") String name);
+
+    @Query("select * from client where upper(name) = upper(:name)")
+    Optional<Client> findByNameIgnoreCase(@Param("name") String name);
 
     @Modifying
     @Query("update client set name = :newName where id = :id")
