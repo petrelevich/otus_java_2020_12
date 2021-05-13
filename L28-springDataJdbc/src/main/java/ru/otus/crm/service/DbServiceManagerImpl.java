@@ -43,8 +43,7 @@ public class DbServiceManagerImpl implements DBServiceManager {
 
     @Override
     public List<Manager> findAll() {
-        var managerList = new ArrayList<Manager>();
-        managerRepository.findAll().forEach(managerList::add);
+        var managerList = managerRepository.findAll();
         log.info("managerList:{}", managerList);
         return managerList;
     }
