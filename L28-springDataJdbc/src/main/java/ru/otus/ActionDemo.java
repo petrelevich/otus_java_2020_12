@@ -94,5 +94,8 @@ public class ActionDemo {
         получаем дочерние:
         [SELECT "client"."id" AS "id", "client"."name" AS "name", "client"."manager_id" AS "manager_id" FROM "client" WHERE "client"."manager_id" = ?]
         */
+        log.info("select all");
+        var allManagers = managerRepository.findAll();
+        log.info("allManagers:{}", allManagers);
     }
 }
