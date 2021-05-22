@@ -13,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
 public class GRPCClient {
 
     private static final String SERVER_HOST = "localhost";
-    private static final int SERVER_PORT = 8090;
+    private static final int SERVER_PORT = 8190;
 
     public static void main(String[] args) throws InterruptedException {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)

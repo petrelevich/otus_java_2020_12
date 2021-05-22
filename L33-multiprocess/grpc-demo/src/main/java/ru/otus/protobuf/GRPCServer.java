@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class GRPCServer {
 
-    public static final int SERVER_PORT = 8090;
+    public static final int SERVER_PORT = 8190;
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
