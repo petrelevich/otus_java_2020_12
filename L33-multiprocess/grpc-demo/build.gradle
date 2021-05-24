@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "com.google.protobuf" version "0.8.16"
+    id 'idea'
 }
 
 sourceCompatibility = JavaVersion.VERSION_13
@@ -13,9 +14,15 @@ dependencies {
     compileOnly "org.apache.tomcat:annotations-api:6.0.53"
 }
 
+/*
 def filesBaseDir = "${project.projectDir}/src/"
 def protoSrcDir = "${project.projectDir}/src/main/proto"
 def grpcSrcDir = "${project.projectDir}/src/main/grpc"
+*/
+
+def filesBaseDir = "$projectDir/build/generated"
+def protoSrcDir = "$projectDir/build/generated/proto"
+def grpcSrcDir = "$projectDir/build/generated/grpc"
 
 sourceSets {
     main {
@@ -25,6 +32,13 @@ sourceSets {
         java {
             srcDir grpcSrcDir
         }
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file(protoSrcDir);
+        sourceDirs += file(grpcSrcDir);
     }
 }
 
