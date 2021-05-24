@@ -28,4 +28,5 @@ public interface Versions {
     String bootstrap = "4.4.1-1";
 
     String jsr305 = "3.0.2";
+    String netty = "4.1.53.Final";
 }
